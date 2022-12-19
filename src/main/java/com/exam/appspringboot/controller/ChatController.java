@@ -34,13 +34,16 @@ public class ChatController {
         );
     }
 
+    public record MessageResponse(List<ChatMessage> messages, long count) {
+    }
+
     @GetMapping("/messages")
     @ResponseBody
-    public RsData<List<ChatMessage>> messages() {
+    public RsData<MessageResponse> messages() {
         return new RsData<>(
                 "S-1",
                 "성공",
-                chatMessages
+                new MessageResponse(chatMessages, chatMessages.size())
         );
     }
 
